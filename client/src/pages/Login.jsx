@@ -6,19 +6,19 @@ import { toast } from 'react-toastify';
 
 export const action =
   (queryClient) =>
-  async ({ request }) => {
-    const formData = await request.formData();
-    const data = Object.fromEntries(formData);
-    try {
-      await customFetch.post('/auth/login', data);
-      queryClient.invalidateQueries();
-      toast.success('Login successful');
-      return redirect('/dashboard');
-    } catch (error) {
-      toast.error(error?.response?.data?.msg);
-      return error;
-    }
-  };
+    async ({ request }) => {
+      const formData = await request.formData();
+      const data = Object.fromEntries(formData);
+      try {
+        await customFetch.post('/auth/login', data);
+        queryClient.invalidateQueries();
+        toast.success('Login successful');
+        return redirect('/dashboard');
+      } catch (error) {
+        toast.error(error?.response?.data?.msg);
+        return error;
+      }
+    };
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Login = () => {
   const loginDemoUser = async () => {
     const data = {
       email: 'test@test.com',
-      password: 'secret123',
+      password: 'secret1234',
     };
     try {
       await customFetch.post('/auth/login', data);
