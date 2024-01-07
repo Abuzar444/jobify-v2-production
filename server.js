@@ -33,7 +33,7 @@ app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }))
 app.use(helmet.contentSecurityPolicy({
   useDefaults: true,
   directives: {
-    "img-src": ["self", "https://res.cloudinary.com/"]
+    "img-src": ["https://jobify-v2-production.onrender.com", "https://res.cloudinary.com/"]
   },
   reportOnly: false
 }))
