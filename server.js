@@ -29,14 +29,6 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }))
-app.use(helmet.contentSecurityPolicy({
-  useDefaults: true,
-  directives: {
-    "img-src": ["https://jobify-v2-production.onrender.com", "https://res.cloudinary.com/"]
-  },
-  reportOnly: false
-}))
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 if (process.env.NODE_ENV === 'development') {
@@ -47,6 +39,15 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(helmet());
 app.use(mongoSanitize());
+
+app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }))
+app.use(helmet.contentSecurityPolicy({
+  useDefaults: true,
+  directives: {
+    "img-src": ["https://jobify-v2-production.onrender.com", "https://res.cloudinary.com/"]
+  },
+  reportOnly: false
+}))
 
 app.get('/', (req, res) => {
   res.send('Hello World');
